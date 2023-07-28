@@ -1,12 +1,15 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 // import ReactPlayer from 'react-player'
 import ReactPlayer from 'react-player'
 import { PiVideoLight } from 'react-icons/pi';
+import { AiOutlineDelete } from 'react-icons/ai';
+import { BsPlusCircle } from 'react-icons/bs';
+import { useQuery } from '@tanstack/react-query';
 // import { MdChangeCircle } from 'react-icons/md';
 // import { CloudinaryContext, Video } from 'cloudinary-react';
 
 const Vidoes = () => {
-    const [totalVideos, setTotalVideos] = useState([])
+    // const [totalVideos, setTotalVideos] = useState([])
     const [url, setUrl] = useState([])
     const [thumbneilId, setThumbneilId] = useState(null)
     const [imgId, setImgId] = useState(null)
@@ -14,13 +17,34 @@ const Vidoes = () => {
     const [crossVAlue, setCrossVAlue] = useState(false)
     // console.log('crosValue', crossVAlue)
     const imageKey = import.meta.env.VITE_imagekey;
-    useEffect(() => {
-        fetch('http://localhost:5000/videos')
+
+    const { data: totalVideos = [], refetch } = useQuery({
+        queryKey: ["videos"],
+        queryFn: async () => {
+            const res = await fetch(`http://localhost:5000/videos`)
+            const data = res.json();
+            return data
+        }
+    })
+
+    // useEffect(() => {
+    //     fetch('')
+    //         .then(res => res.json())
+    //         .then(data => {
+    //             setTotalVideos(data)
+    //         })
+    // }, [])
+    const handleDelete = (id) => {
+        console.log(id)
+        fetch(`http://localhost:5000/videoDelete/${id}`, {
+            method: 'Delete'
+        })
             .then(res => res.json())
-            .then(data => {
-                setTotalVideos(data)
+            .then(result => {
+                console.log(result)
+                refetch(`http://localhost:5000/videos`)
             })
-    }, [])
+    }
     const handleTitle = (e) => {
         console.log(crossVAlue, e.target.title.value, thumbneilId)
 
@@ -41,6 +65,7 @@ const Vidoes = () => {
                 .then(res => res.json())
                 .then(data => {
                     console.log(data)
+                    refetch(`http://localhost:5000/videos`)
                 })
 
         }
@@ -78,7 +103,7 @@ const Vidoes = () => {
                         .then(res => res.json())
                         .then(result => {
                             console.log(result);
-
+                            refetch(`http://localhost:5000/videos`)
                         })
                 }
             })
@@ -111,6 +136,24 @@ const Vidoes = () => {
             .then(res => res.json())
             .then(data => {
                 console.log(data.secure_url);
+                const datas = {
+                    src: data.secure_url
+                }
+                if (data.secure_url) {
+                    fetch('http://localhost:5000/uploadVideo', {
+                        method: 'POST',
+                        headers: {
+                            'content-type': 'application/json'
+                        },
+                        body: JSON.stringify(datas)
+                    })
+                        .then(res => res.json())
+                        .then(result => {
+                            console.log(result)
+                            refetch(`http://localhost:5000/videos`)
+                        })
+                }
+
 
             })
 
@@ -121,32 +164,42 @@ const Vidoes = () => {
     return (
         <div className='lg:mx-24 md:mx-20 mx-16 py-16'>
             <div className='flex justify-end py-3'>
-                <span className='bg-primary'>
+                <input type="file" name="photo" id="takevideo" accept="video/*" className="invisible h-0 w-0" onChange={handleUpload} />
+                <label htmlFor="takevideo" className="btn btn-md bg-blue-700 hover:bg-blue-700 text-white hover:text-white" title="Upload Video" ><BsPlusCircle className="text-xl"></BsPlusCircle>Upload Video</label>
+
+                {/* <span className='bg-primary'>
                     <h1 className=' text-white font-bold text-center'>Upload Video</h1>
                     <input className='text-white' type="file" accept="video/*" onChange={handleUpload} />
-                </span>
+                </span> */}
             </div>
             <div className='grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 lg:gap-4 md:gap-8'>
 
                 {
                     totalVideos.map((vidoe, i) => <div key={i} className='h-96 bg-base-200 shadow-lg'>
                         <button onClick={() => handleVideo(vidoe._id, vidoe.src)}> <span>
-                            <img src={vidoe?.picture ? vidoe?.picture : `https://i.ibb.co/9m0FFhV/squirrel-animal-cute-rodents-47547-jpeg-cs-srgb-dl-pexels-pixabay-47547.jpg`} alt="" className='h-60 w-96' />
+                            <img src={vidoe?.picture ? vidoe?.picture : `https://i.ibb.co/VW3r4C6/267-2678423-bacteria-video-thumbnail-default.png`} alt="" className='h-60 w-96' />
                             {/* <PiVideoLight className=''></PiVideoLight> */}
                         </span>
                             <span className=''>
-                                <h1 className='text-xl font-semibold flex'><PiVideoLight className='text-4xl  me-2'></PiVideoLight>{vidoe.title}</h1>
+                                <h1 className='text-xl font-semibold flex'><PiVideoLight className='text-4xl  me-2'></PiVideoLight>{vidoe?.title ? vidoe?.title : 'Latest Video'}</h1>
                             </span>
                         </button>
-                        <div className='flex justify-between'>
-                            <span className='w-3/5'>
-                                <h1 className='ms-3 font-semibold'>Change Thambneil</h1>
-                                <input className='text-white input-sm' type="file" accept="image/*" onChange={handleThambneil} onClick={() => { setImgId(vidoe._id) }} />
+                        <div className='flex justify-between mx-2'>
+                            <span className=''>
+                                <input type="file" name="photo" id="takephoto" accept="image/*" className="invisible h-0 w-0" onChange={handleThambneil} />
+                                <label htmlFor="takephoto" className="btn btn-md hover:bg-blue-700 hover:text-white" title="Change thumbneil" onClick={() => { setImgId(vidoe._id) }}><BsPlusCircle className="text-xl"></BsPlusCircle>Change  Thumb</label>
+
                             </span>
-                            <span className='w-2/5'>
-                                <button className='font-semibold btn btn-md' onClick={() => { window.my_modal_4.showModal(); setThumbneilId(vidoe._id); }}>Change title</button>
+                            <span className=''>
+                                <button className='font-semibold btn btn-md hover:bg-blue-700 hover:text-white' onClick={() => { window.my_modal_4.showModal(); setThumbneilId(vidoe._id); }}>Change title</button>
+                            </span>
+                            <span>
+
+                                <button className=' btn btn-md  hover:bg-red-500  hover:text-white' onClick={() => handleDelete(vidoe._id)}><AiOutlineDelete className='text-xl '></AiOutlineDelete></button>
+
                             </span>
                         </div>
+
 
                     </div>)
                 }
