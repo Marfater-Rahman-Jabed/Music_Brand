@@ -1,0 +1,33 @@
+/* .textBg {
+
+    background: linear-gradient(to top, #ff630e 0%, #ff000a 100%);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    transform: translateY(10px);
+} */
+
+.text-color-animation {
+    color: transparent;
+    background-color: linear-gradient(to top, #ff630e 0%, #ff000a 100%);
+    /* The animation will take 2 seconds to complete */
+    animation: color-change 7s infinite;
+    transition: background-color 7s ease-in-out;
+}
+
+/* The animation definition */
+@keyframes color-change {
+    0% {
+        color: #ff630e;
+        /* transform: translateY(0%); */
+    }
+
+    50% {
+        color: #ff000a;
+        /* transform: translateY(15%); */
+    }
+
+    100% {
+        color: #ff630e;
+        /* transform: translateY(5%); */
+    }
+}

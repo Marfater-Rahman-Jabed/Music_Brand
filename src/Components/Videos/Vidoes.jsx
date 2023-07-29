@@ -2,19 +2,24 @@ import { useState } from 'react'
 // import ReactPlayer from 'react-player'
 import ReactPlayer from 'react-player'
 import { PiVideoLight } from 'react-icons/pi';
-import { AiOutlineDelete } from 'react-icons/ai';
+import { AiOutlineDelete, AiOutlinePlayCircle } from 'react-icons/ai';
 import { BsPlusCircle } from 'react-icons/bs';
+// import { AiOutlinePlayCircle } from 'react-icons/bs';
 import { useQuery } from '@tanstack/react-query';
+import { toast } from 'react-toastify';
+// import { toast } from 'react-hot-toast';
 // import { MdChangeCircle } from 'react-icons/md';
 // import { CloudinaryContext, Video } from 'cloudinary-react';
 
 const Vidoes = () => {
+    const resolveAfter3Sec = new Promise(resolve => setTimeout(resolve, 1000));
     // const [totalVideos, setTotalVideos] = useState([])
     const [url, setUrl] = useState([])
     const [thumbneilId, setThumbneilId] = useState(null)
     const [imgId, setImgId] = useState(null)
     const [value, setValue] = useState(false)
     const [crossVAlue, setCrossVAlue] = useState(false)
+    const [uploadLoading, setUploadLoading] = useState(false)
     // console.log('crosValue', crossVAlue)
     const imageKey = import.meta.env.VITE_imagekey;
 
@@ -27,13 +32,7 @@ const Vidoes = () => {
         }
     })
 
-    // useEffect(() => {
-    //     fetch('')
-    //         .then(res => res.json())
-    //         .then(data => {
-    //             setTotalVideos(data)
-    //         })
-    // }, [])
+
     const handleDelete = (id) => {
         console.log(id)
         fetch(`http://localhost:5000/videoDelete/${id}`, {
@@ -42,6 +41,13 @@ const Vidoes = () => {
             .then(res => res.json())
             .then(result => {
                 console.log(result)
+                toast.promise(
+                    resolveAfter3Sec,
+                    {
+                        pending: 'Video is Deleting',
+                        success: 'SuccessFully Deleted👌'
+                    }
+                )
                 refetch(`http://localhost:5000/videos`)
             })
     }
@@ -65,6 +71,14 @@ const Vidoes = () => {
                 .then(res => res.json())
                 .then(data => {
                     console.log(data)
+                    e.target.reset()
+                    toast.promise(
+                        resolveAfter3Sec,
+                        {
+                            pending: 'Video Title Updating',
+                            success: 'SuccessFully Updated👌'
+                        }
+                    )
                     refetch(`http://localhost:5000/videos`)
                 })
 
@@ -103,6 +117,13 @@ const Vidoes = () => {
                         .then(res => res.json())
                         .then(result => {
                             console.log(result);
+                            toast.promise(
+                                resolveAfter3Sec,
+                                {
+                                    pending: 'Video thumbneil Updating',
+                                    success: 'SuccessFully Updated👌'
+                                }
+                            )
                             refetch(`http://localhost:5000/videos`)
                         })
                 }
@@ -119,13 +140,16 @@ const Vidoes = () => {
         setUrl(src)
         setValue(true)
     }
+    const handleRightClick = (e) => {
+        e.preventDefault();
+    }
     const handleUpload = async (e) => {
 
         const file = e.target.files[0];
         const formData = new FormData();
         formData.append('file', file);
         formData.append('upload_preset', 'uyy59f3d'); // Replace with your upload preset name
-
+        setUploadLoading(true)
         fetch(
             `https://api.cloudinary.com/v1_1/dg8hb8vuk/video/upload`,
             {
@@ -140,6 +164,7 @@ const Vidoes = () => {
                     src: data.secure_url
                 }
                 if (data.secure_url) {
+
                     fetch('http://localhost:5000/uploadVideo', {
                         method: 'POST',
                         headers: {
@@ -150,6 +175,14 @@ const Vidoes = () => {
                         .then(res => res.json())
                         .then(result => {
                             console.log(result)
+                            setUploadLoading(false)
+                            toast.promise(
+                                resolveAfter3Sec,
+                                {
+                                    pending: 'Video Uploading',
+                                    success: 'SuccessFully Uploaded👌'
+                                }
+                            )
                             refetch(`http://localhost:5000/videos`)
                         })
                 }
@@ -162,77 +195,86 @@ const Vidoes = () => {
     };
 
     return (
-        <div className='lg:mx-24 md:mx-20 mx-16 py-16'>
-            <div className='flex justify-end py-3'>
-                <input type="file" name="photo" id="takevideo" accept="video/*" className="invisible h-0 w-0" onChange={handleUpload} />
-                <label htmlFor="takevideo" className="btn btn-md bg-blue-700 hover:bg-blue-700 text-white hover:text-white" title="Upload Video" ><BsPlusCircle className="text-xl"></BsPlusCircle>Upload Video</label>
-
-                {/* <span className='bg-primary'>
-                    <h1 className=' text-white font-bold text-center'>Upload Video</h1>
-                    <input className='text-white' type="file" accept="video/*" onChange={handleUpload} />
-                </span> */}
-            </div>
-            <div className='grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 lg:gap-4 md:gap-8'>
-
+        <div className='py-16 bg-slate-800'>
+            <div className='flex justify-end pe-4 mb-4'>
                 {
-                    totalVideos.map((vidoe, i) => <div key={i} className='h-96 bg-base-200 shadow-lg'>
-                        <button onClick={() => handleVideo(vidoe._id, vidoe.src)}> <span>
-                            <img src={vidoe?.picture ? vidoe?.picture : `https://i.ibb.co/VW3r4C6/267-2678423-bacteria-video-thumbnail-default.png`} alt="" className='h-60 w-96' />
-                            {/* <PiVideoLight className=''></PiVideoLight> */}
-                        </span>
-                            <span className=''>
-                                <h1 className='text-xl font-semibold flex'><PiVideoLight className='text-4xl  me-2'></PiVideoLight>{vidoe?.title ? vidoe?.title : 'Latest Video'}</h1>
-                            </span>
-                        </button>
-                        <div className='flex justify-between mx-2'>
-                            <span className=''>
-                                <input type="file" name="photo" id="takephoto" accept="image/*" className="invisible h-0 w-0" onChange={handleThambneil} />
-                                <label htmlFor="takephoto" className="btn btn-md hover:bg-blue-700 hover:text-white" title="Change thumbneil" onClick={() => { setImgId(vidoe._id) }}><BsPlusCircle className="text-xl"></BsPlusCircle>Change  Thumb</label>
-
-                            </span>
-                            <span className=''>
-                                <button className='font-semibold btn btn-md hover:bg-blue-700 hover:text-white' onClick={() => { window.my_modal_4.showModal(); setThumbneilId(vidoe._id); }}>Change title</button>
-                            </span>
-                            <span>
-
-                                <button className=' btn btn-md  hover:bg-red-500  hover:text-white' onClick={() => handleDelete(vidoe._id)}><AiOutlineDelete className='text-xl '></AiOutlineDelete></button>
-
-                            </span>
-                        </div>
-
-
-                    </div>)
+                    uploadLoading ? <span className="btn btn-md bg-blue-700 px-6"> <p className='w-6 h-6 border-4 rounded-full animate-spin border-dashed mx-auto  border-white'> </p></span> : <span><input type="file" name="photo" id="takevideo" accept="video/*" className="invisible h-0 w-0" onChange={handleUpload} />
+                        <label htmlFor="takevideo" className="btn btn-md bg-blue-700 hover:bg-blue-700 text-white hover:text-white" title="Upload Video" ><BsPlusCircle className="text-xl"></BsPlusCircle>Upload Video</label></span>
                 }
 
 
-                <dialog id="my_modal_3" className="modal">
-                    <form method="dialog" className="modal-box p-4 lg:h-[70vh] md:h-[35vh]   w-[100vw]  bg-black">
-                        <button className="btn btn-md  btn-circle bg-red-500 absolute right-4 lg:top-6 md:top-4 top-4 text-2xl" onClick={() => setValue(false)}>✕</button>
-                        <div className=' w-full lg:mt-12 md:mt-16 mt-16 rounded-full lg:h-5/6 '>
-                            <ReactPlayer url={url} controls playing={value} width='100%'
-                                height='100%'
 
-                            />
-                        </div>
-                    </form>
+            </div>
+            <div className='lg:mx-24 md:mx-20 mx-10 '>
 
-                </dialog>
-                {/* You can open the modal using ID.showModal() method */}
+                <div className='grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 lg:gap-4 md:gap-8 gap-4'>
 
-                <dialog id="my_modal_4" className="modal">
-                    <div className="modal-box">
+                    {
+                        totalVideos.map((vidoe, i) => <div key={i} className='h-96 bg-base-200 shadow-lg'>
+                            <button onClick={() => handleVideo(vidoe._id, vidoe.src)}> <span>
+                                <img src={vidoe?.picture ? vidoe?.picture : `https://i.ibb.co/VW3r4C6/267-2678423-bacteria-video-thumbnail-default.png`} onContextMenu={handleRightClick} alt="" className='h-60 w-96' />
 
-                        <form method="dialog" onSubmit={handleTitle}>
-                            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onClick={() => setCrossVAlue(true)}>✕</button>
-                            <h3 className="font-bold text-lg mb-4">Set Title Here</h3>
-                            <input type="text" name='title' placeholder="Change Title here" className="input input-bordered input-secondary w-full mb-3" />
-                            <input type="Submit" className="btn bg-primary hover:bg-primary text-white w-full " onClick={() => setCrossVAlue(false)} />
+                            </span>
+                                <span className=''>
+                                    <h1 className='text-xl font-semibold flex ms-4 mt-2'><PiVideoLight className='text-4xl  me-2 hover:animate-pulse'></PiVideoLight>{vidoe?.title ? vidoe?.title : 'Latest Video'}<AiOutlinePlayCircle className='text-3xl mt-1 hover:animate-spin mx-2'></AiOutlinePlayCircle></h1>
 
+                                </span>
+                            </button>
+                            <div className='flex justify-between mx-2'>
+                                <span className=''>
+                                    <input type="file" name="photo" id="takephoto" accept="image/*" className="invisible h-0 w-0" onChange={handleThambneil} />
+                                    <label htmlFor="takephoto" className="btn btn-md hover:bg-blue-700 hover:text-white" title="Change thumbneil" onClick={() => { setImgId(vidoe._id) }}><BsPlusCircle className="text-xl"></BsPlusCircle>Change  Thumb</label>
+
+                                </span>
+                                <span className=''>
+                                    <button className='font-semibold btn btn-md hover:bg-blue-700 hover:text-white' onClick={() => { window.my_modal_4.showModal(); setThumbneilId(vidoe._id); }}>Change title</button>
+                                </span>
+                                <span>
+
+                                    <button className=' btn btn-md  hover:bg-red-500  hover:text-white' onClick={() => handleDelete(vidoe._id)}><AiOutlineDelete className='text-xl '></AiOutlineDelete></button>
+
+                                </span>
+                            </div>
+
+
+                        </div>)
+
+
+                    }
+
+
+                    <dialog id="my_modal_3" className="modal">
+                        <form method="dialog" className="modal-box p-4 lg:h-[70vh] md:h-[55vh]   w-[100vw]  bg-black">
+                            <button className="btn btn-md  btn-circle bg-red-500 absolute right-4 lg:top-6 md:top-4 top-4 text-2xl" onClick={() => setValue(false)}>✕</button>
+                            <div className=' w-full lg:mt-12 md:mt-16 mt-16 rounded-full lg:h-5/6 '>
+                                <ReactPlayer url={url} controls playing={value} width='100%'
+                                    height='100%'
+
+                                />
+                            </div>
                         </form>
-                    </div>
-                </dialog>
+
+                    </dialog>
+                    {/* You can open the modal using ID.showModal() method */}
+
+                    <dialog id="my_modal_4" className="modal">
+                        <div className="modal-box">
+
+                            <form method="dialog" onSubmit={handleTitle}>
+                                <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onClick={() => setCrossVAlue(true)}>✕</button>
+                                <h3 className="font-bold text-lg mb-4">Set Title Here</h3>
+                                <input type="text" name='title' placeholder="Change Title here" className="input input-bordered input-secondary w-full mb-3" />
+                                <input type="Submit" className="btn bg-primary hover:bg-primary text-white w-full " onClick={() => setCrossVAlue(false)} />
+
+                            </form>
+                        </div>
+                    </dialog>
 
 
+                </div>
+                {/* <div className='flex justify-center'>
+                <button className='btn btn-outline'>See All</button>
+            </div> */}
             </div>
         </div>
     );
