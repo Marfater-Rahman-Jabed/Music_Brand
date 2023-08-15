@@ -1,4 +1,5 @@
-
+import '../HeroSection/HeroSection.css'
+import Logo from '../../assets/islamicImageLogo.jpg'
 const NavBar = () => {
     return (
         <div className="navbar bg-base-100 lg:p-6 md:p-4" style={{ position: "sticky", top: 0, zIndex: 100 }}>
@@ -47,7 +48,10 @@ const NavBar = () => {
 
                     </ul>
                 </div>
-                <h1 className="lg:text-5xl md:text-5xl text-4xl md:mx-2 font-bold">Music Brand</h1>
+                <div className='flex'>
+                    <img src={Logo} alt="" className='w-20 h-20 rounded-full' />
+                    <h1 className="lg:text-7xl md:text-7xl text-6xl md:mx-2  text-color-animation font-serif"><i>Minar</i></h1>
+                </div>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">

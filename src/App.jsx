@@ -2,11 +2,11 @@
 
 
 // import Audios from "./Components/Audios/Audios";
-import HeroSection from "./Components/HeroSection/HeroSection";
-import NavBar from "./Components/NavBar/NavBar"
-import Vidoes from "./Components/Videos/Vidoes"
+
+import { RouterProvider } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { router } from './Routes/Routes';
 // import './App.css'
 
 function App() {
@@ -26,13 +26,9 @@ function App() {
         pauseOnHover
         theme="colored"
       />
-      {/* Same as */}
-      {/* <ToastContainer /> */}
-      <NavBar></NavBar>
-      <HeroSection></HeroSection>
-      <Vidoes></Vidoes>
+      <RouterProvider router={router}>
 
-      {/* <Audios></Audios> */}
+      </RouterProvider>
     </div>
   )
 }

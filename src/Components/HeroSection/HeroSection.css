@@ -10,24 +10,37 @@
     color: transparent;
     background-color: linear-gradient(to top, #ff630e 0%, #ff000a 100%);
     /* The animation will take 2 seconds to complete */
-    animation: color-change 7s infinite;
-    transition: background-color 7s ease-in-out;
+    animation: color-change 13s infinite;
+    transition: background-color 10s ease-in-out;
 }
+
 
 /* The animation definition */
 @keyframes color-change {
     0% {
-        color: #ff630e;
+        color: #0150fa;
         /* transform: translateY(0%); */
     }
 
-    50% {
-        color: #ff000a;
+    20% {
+        color: #281385;
+    }
+
+    40% {
+        color: #281385;
+    }
+
+    60% {
+        color: #fa010a;
         /* transform: translateY(15%); */
     }
 
+    80% {
+        color: #f35805;
+    }
+
     100% {
-        color: #ff630e;
+        color: #1f5ee6;
         /* transform: translateY(5%); */
     }
 }

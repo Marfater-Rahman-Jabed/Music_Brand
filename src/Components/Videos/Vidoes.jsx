@@ -1,19 +1,15 @@
 import { useState } from 'react'
-// import ReactPlayer from 'react-player'
 import ReactPlayer from 'react-player'
 import { PiVideoLight } from 'react-icons/pi';
 import { AiOutlineDelete, AiOutlinePlayCircle } from 'react-icons/ai';
 import { BsPlusCircle } from 'react-icons/bs';
-// import { AiOutlinePlayCircle } from 'react-icons/bs';
 import { useQuery } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
-// import { toast } from 'react-hot-toast';
-// import { MdChangeCircle } from 'react-icons/md';
-// import { CloudinaryContext, Video } from 'cloudinary-react';
+
 
 const Vidoes = () => {
     const resolveAfter3Sec = new Promise(resolve => setTimeout(resolve, 1000));
-    // const [totalVideos, setTotalVideos] = useState([])
+    const [clickAll, setClickAll] = useState()
     const [url, setUrl] = useState([])
     const [thumbneilId, setThumbneilId] = useState(null)
     const [imgId, setImgId] = useState(null)
@@ -31,7 +27,6 @@ const Vidoes = () => {
             return data
         }
     })
-
 
     const handleDelete = (id) => {
         console.log(id)
@@ -81,7 +76,6 @@ const Vidoes = () => {
                     )
                     refetch(`http://localhost:5000/videos`)
                 })
-
         }
 
     }
@@ -164,7 +158,6 @@ const Vidoes = () => {
                     src: data.secure_url
                 }
                 if (data.secure_url) {
-
                     fetch('http://localhost:5000/uploadVideo', {
                         method: 'POST',
                         headers: {
@@ -186,60 +179,110 @@ const Vidoes = () => {
                             refetch(`http://localhost:5000/videos`)
                         })
                 }
-
-
             })
-
-        // const data = await response.json();
-
     };
 
     return (
         <div className='py-16 bg-slate-800'>
-            <div className='flex justify-end pe-4 mb-4'>
+            <div className='text-white pb-10'>
+                <h1 className="text-center font-bold text-5xl">Videos</h1>
+                <p className="text-xl lg:px-60 px-4 text-center mt-6">Grursus mal suada faci lisis Lorem ipsum dolarorit more a ametion consectetur elit. Vesti at bulum nec odio aea the dumm ipsumm ipsum.</p>
+            </div>
+            <div className='flex lg:justify-end md:justify-end justify-center lg:pe-10 md:pe-8  mb-4'>
                 {
                     uploadLoading ? <span className="btn btn-md bg-blue-700 px-6"> <p className='w-6 h-6 border-4 rounded-full animate-spin border-dashed mx-auto  border-white'> </p></span> : <span><input type="file" name="photo" id="takevideo" accept="video/*" className="invisible h-0 w-0" onChange={handleUpload} />
-                        <label htmlFor="takevideo" className="btn btn-md bg-blue-700 hover:bg-blue-700 text-white hover:text-white" title="Upload Video" ><BsPlusCircle className="text-xl"></BsPlusCircle>Upload Video</label></span>
+                        <label htmlFor="takevideo" className="btn btn-outline bg-green-600 hover:bg-green-600 text-white px-16 hover:text-white" title="Upload Video" ><BsPlusCircle className="text-xl"></BsPlusCircle>Upload Video</label></span>
                 }
-
-
-
             </div>
-            <div className='lg:mx-24 md:mx-20 mx-10 '>
-
-                <div className='grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 lg:gap-4 md:gap-8 gap-4'>
-
-                    {
-                        totalVideos.map((vidoe, i) => <div key={i} className='h-96 bg-base-200 shadow-lg'>
-                            <button onClick={() => handleVideo(vidoe._id, vidoe.src)}> <span>
-                                <img src={vidoe?.picture ? vidoe?.picture : `https://i.ibb.co/VW3r4C6/267-2678423-bacteria-video-thumbnail-default.png`} onContextMenu={handleRightClick} alt="" className='h-60 w-96' />
-
-                            </span>
-                                <span className=''>
-                                    <h1 className='text-xl font-semibold flex ms-4 mt-2'><PiVideoLight className='text-4xl  me-2 hover:animate-pulse'></PiVideoLight>{vidoe?.title ? vidoe?.title : 'Latest Video'}<AiOutlinePlayCircle className='text-3xl mt-1 hover:animate-spin mx-2'></AiOutlinePlayCircle></h1>
-
-                                </span>
-                            </button>
-                            <div className='flex justify-between mx-2'>
-                                <span className=''>
-                                    <input type="file" name="photo" id="takephoto" accept="image/*" className="invisible h-0 w-0" onChange={handleThambneil} />
-                                    <label htmlFor="takephoto" className="btn btn-md hover:bg-blue-700 hover:text-white" title="Change thumbneil" onClick={() => { setImgId(vidoe._id) }}><BsPlusCircle className="text-xl"></BsPlusCircle>Change  Thumb</label>
-
-                                </span>
-                                <span className=''>
-                                    <button className='font-semibold btn btn-md hover:bg-blue-700 hover:text-white' onClick={() => { window.my_modal_4.showModal(); setThumbneilId(vidoe._id); }}>Change title</button>
-                                </span>
-                                <span>
-
-                                    <button className=' btn btn-md  hover:bg-red-500  hover:text-white' onClick={() => handleDelete(vidoe._id)}><AiOutlineDelete className='text-xl '></AiOutlineDelete></button>
-
-                                </span>
+            <div className='lg:px-8 md:px-6 px-4 '>
+                <div >
+                    {clickAll ?
+                        <div className='grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 lg:gap-4 md:gap-8 gap-4 '>
+                            {
+                                totalVideos?.map((vidoe, i) => <div key={i} className='h-96 bg-base-200 shadow-lg rounded-lg'>
+                                    <button onClick={() => handleVideo(vidoe._id, vidoe.src)}> <span >
+                                        <img src={vidoe?.picture ? vidoe?.picture : `https://i.ibb.co/VW3r4C6/267-2678423-bacteria-video-thumbnail-default.png`} onContextMenu={handleRightClick} alt="" className='h-60 w-96 rounded-t-lg' />
+                                    </span>
+                                        <span className=''>
+                                            <h1 className='text-xl font-semibold flex ms-4 mt-2'><PiVideoLight className='text-4xl  me-2 hover:animate-pulse'></PiVideoLight>{vidoe?.title ? vidoe?.title : 'Latest Video'}<AiOutlinePlayCircle className='text-3xl mt-1 hover:animate-spin mx-2'></AiOutlinePlayCircle></h1>
+                                        </span>
+                                    </button>
+                                    <div className='flex justify-between mx-2'>
+                                        <span className=''>
+                                            <input type="file" name="photo" id="takephoto" accept="image/*" className="invisible h-0 w-0" onChange={handleThambneil} />
+                                            <label htmlFor="takephoto" className="btn btn-md hover:bg-blue-700 hover:text-white" title="Change thumbneil" onClick={() => { setImgId(vidoe._id) }}><BsPlusCircle className="text-xl"></BsPlusCircle>Change  Thumb</label>
+                                        </span>
+                                        <span className=''>
+                                            <button className='font-semibold btn btn-md hover:bg-blue-700 hover:text-white' onClick={() => { window.my_modal_4.showModal(); setThumbneilId(vidoe._id); }}>Change title</button>
+                                        </span>
+                                        <span>
+                                            <button className=' btn btn-md  hover:bg-red-500  hover:text-white' onClick={() => handleDelete(vidoe._id)}><AiOutlineDelete className='text-xl '></AiOutlineDelete></button>
+                                        </span>
+                                    </div>
+                                </div>)
+                            }
+                        </div> :
+                        <div className='flex gap-2'>
+                            <div className='lg:w-2/5  w-0 h-full lg:visible  invisible'>
+                                {
+                                    totalVideos?.slice(0, 1)?.map((vidoe, i) => <div key={i} className='h-full bg-base-200 shadow-lg rounded-lg'>
+                                        <button onClick={() => handleVideo(vidoe._id, vidoe.src)}> <span >
+                                            <img src={vidoe?.picture ? vidoe?.picture : `https://i.ibb.co/VW3r4C6/267-2678423-bacteria-video-thumbnail-default.png`} onContextMenu={handleRightClick} alt="" className='lg:h-[100vh] lg:w-[100vw] rounded-t-lg' />
+                                        </span>
+                                            <span className=''>
+                                                <h1 className='text-xl font-semibold flex ms-4 mt-2'><PiVideoLight className='text-4xl  me-2 hover:animate-pulse'></PiVideoLight>{vidoe?.title ? vidoe?.title : 'Latest Video'}<AiOutlinePlayCircle className='text-3xl mt-1 hover:animate-spin mx-2'></AiOutlinePlayCircle></h1>
+                                            </span>
+                                        </button>
+                                        <div className='flex justify-between mx-2 pt-4 pb-4'>
+                                            <span className=''>
+                                                <input type="file" name="photo" id="takephoto" accept="image/*" className="invisible h-0 w-0" onChange={handleThambneil} />
+                                                <label htmlFor="takephoto" className="btn btn-md hover:bg-blue-700 hover:text-white" title="Change thumbneil" onClick={() => { setImgId(vidoe._id) }}><BsPlusCircle className="text-xl"></BsPlusCircle>Change  Thumb</label>
+                                            </span>
+                                            <span className=''>
+                                                <button className='font-semibold btn btn-md hover:bg-blue-700 hover:text-white' onClick={() => { window.my_modal_4.showModal(); setThumbneilId(vidoe._id); }}>Change title</button>
+                                            </span>
+                                            <span>
+                                                <button className=' btn btn-md  hover:bg-red-500  hover:text-white' onClick={() => handleDelete(vidoe._id)}><AiOutlineDelete className='text-xl '></AiOutlineDelete></button>
+                                            </span>
+                                        </div>
+                                    </div>)
+                                }
                             </div>
+                            <div className='grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 lg:gap-2 md:gap-4 gap-2 lg:w-3/5 '>
+                                {
+                                    totalVideos?.slice(1, 5)?.map((vidoe, i) => <div key={i} className='h-96 bg-base-200 shadow-lg rounded-lg'>
+                                        <button onClick={() => handleVideo(vidoe._id, vidoe.src)}> <span >
+                                            <img src={vidoe?.picture ? vidoe?.picture : `https://i.ibb.co/VW3r4C6/267-2678423-bacteria-video-thumbnail-default.png`} onContextMenu={handleRightClick} alt="" className='h-60 w-96 rounded-t-lg' />
+
+                                        </span>
+                                            <span className=''>
+                                                <h1 className='text-xl font-semibold flex ms-4 mt-2'><PiVideoLight className='text-4xl  me-2 hover:animate-pulse'></PiVideoLight>{vidoe?.title ? vidoe?.title : 'Latest Video'}<AiOutlinePlayCircle className='text-3xl mt-1 hover:animate-spin mx-2'></AiOutlinePlayCircle></h1>
+
+                                            </span>
+                                        </button>
+                                        <div className='flex justify-between mx-2'>
+                                            <span className=''>
+                                                <input type="file" name="photo" id="takephoto" accept="image/*" className="invisible h-0 w-0" onChange={handleThambneil} />
+                                                <label htmlFor="takephoto" className="btn btn-md hover:bg-blue-700 hover:text-white" title="Change thumbneil" onClick={() => { setImgId(vidoe._id) }}><BsPlusCircle className="text-xl"></BsPlusCircle>Change  Thumb</label>
+
+                                            </span>
+                                            <span className=''>
+                                                <button className='font-semibold btn btn-md hover:bg-blue-700 hover:text-white' onClick={() => { window.my_modal_4.showModal(); setThumbneilId(vidoe._id); }}>Change title</button>
+                                            </span>
+                                            <span>
+
+                                                <button className=' btn btn-md  hover:bg-red-500  hover:text-white' onClick={() => handleDelete(vidoe._id)}><AiOutlineDelete className='text-xl '></AiOutlineDelete></button>
+
+                                            </span>
+                                        </div>
 
 
-                        </div>)
+                                    </div>)
 
 
+                                }
+                            </div>
+                        </div>
                     }
 
 
@@ -272,9 +315,12 @@ const Vidoes = () => {
 
 
                 </div>
-                {/* <div className='flex justify-center'>
-                <button className='btn btn-outline'>See All</button>
-            </div> */}
+                <div className='flex lg:justify-end md:justify-end justify-center  py-10'>
+                    {
+                        clickAll ? '' :
+                            <button className='btn btn-outline bg-green-600 hover:bg-green-600 text-white px-16' onClick={() => setClickAll(true)}>See All Videos</button>
+                    }
+                </div>
             </div>
         </div>
     );
