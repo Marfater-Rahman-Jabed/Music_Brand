@@ -1,4 +1,5 @@
 import BlogSection from "../../Components/BlogSection/BlogSection";
+import Contributor from "../../Components/Contributor/Contributor";
 import HeroSection from "../../Components/HeroSection/HeroSection";
 
 import PopularBlog from "../../Components/HeroSection/PopularBlog/PopularBlog";
@@ -17,6 +18,7 @@ const Home = () => {
             <UpcommingBlog></UpcommingBlog>
             <ImageSection></ImageSection>
             <Vidoes></Vidoes>
+            <Contributor></Contributor>
 
         </div>
     );

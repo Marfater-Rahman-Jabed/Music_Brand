@@ -1,3 +1,4 @@
+import { AiFillEye } from 'react-icons/ai';
 import imgLogo from '../../../assets/islamicImageLogo.jpg'
 const PopularBlog = () => {
     return (
@@ -16,8 +17,8 @@ const PopularBlog = () => {
                         <div className="p-4 flex justify-center lg:items-center lg:w-72 w-56">
                             <img src={imgLogo} alt="" className='w-12 h-12 rounded-full mr-2' />
                             <div >
-                                <h1 className='lg:text-xl font-bold'>Auther : Name</h1>
-                                <h1>Auther document</h1>
+                                <h1 className='lg:text-xl font-bold'> Abdullah Rashid</h1>
+                                <h1 className='flex items-center gap-1'><AiFillEye className='text-xl'></AiFillEye><span>300 views</span></h1>
                             </div>
                         </div>
                         <div className="p-4 lg:w-60 w-4 flex justify-end  lg:pe-16 md:pe-10">
@@ -35,8 +36,8 @@ const PopularBlog = () => {
                         <div className="p-4 flex justify-center lg:items-center lg:w-72 w-56">
                             <img src={imgLogo} alt="" className='w-12 h-12 rounded-full mr-2' />
                             <div >
-                                <h1 className='lg:text-xl font-bold'>Auther : Name</h1>
-                                <h1>Auther document</h1>
+                                <h1 className='lg:text-xl font-bold'> Abdullah Rashid</h1>
+                                <h1 className='flex items-center gap-1'><AiFillEye className='text-xl'></AiFillEye><span>300 views</span></h1>
                             </div>
                         </div>
                         <div className="p-4 lg:w-60 w-4 flex justify-end  lg:pe-16 md:pe-10">
@@ -54,8 +55,8 @@ const PopularBlog = () => {
                         <div className="p-4 flex justify-center lg:items-center lg:w-72 w-56">
                             <img src={imgLogo} alt="" className='w-12 h-12 rounded-full mr-2' />
                             <div >
-                                <h1 className='lg:text-xl font-bold'>Auther : Name</h1>
-                                <h1>Auther document</h1>
+                                <h1 className='lg:text-xl font-bold'> Abdullah Rashid</h1>
+                                <h1 className='flex items-center gap-1'><AiFillEye className='text-xl'></AiFillEye><span>300 views</span></h1>
                             </div>
                         </div>
                         <div className="p-4 lg:w-60 w-4 flex justify-end  lg:pe-16 md:pe-10">
@@ -73,8 +74,8 @@ const PopularBlog = () => {
                         <div className="p-4 flex justify-center lg:items-center lg:w-72 w-56">
                             <img src={imgLogo} alt="" className='w-12 h-12 rounded-full mr-2' />
                             <div >
-                                <h1 className='lg:text-xl font-bold'>Auther : Name</h1>
-                                <h1>Auther document</h1>
+                                <h1 className='lg:text-xl font-bold'> Abdullah Rashid</h1>
+                                <h1 className='flex items-center gap-1'><AiFillEye className='text-xl'></AiFillEye><span>300 views</span></h1>
                             </div>
                         </div>
                         <div className="p-4 lg:w-60 w-4 flex justify-end  lg:pe-16 md:pe-10">
@@ -92,8 +93,8 @@ const PopularBlog = () => {
                         <div className="p-4 flex justify-center lg:items-center lg:w-72 w-56">
                             <img src={imgLogo} alt="" className='w-12 h-12 rounded-full mr-2' />
                             <div >
-                                <h1 className='lg:text-xl font-bold'>Auther : Name</h1>
-                                <h1>Auther document</h1>
+                                <h1 className='lg:text-xl font-bold'> Abdullah Rashid</h1>
+                                <h1 className='flex items-center gap-1'><AiFillEye className='text-xl'></AiFillEye><span>300 views</span></h1>
                             </div>
                         </div>
                         <div className="p-4 lg:w-60 w-4 flex justify-end  lg:pe-16 md:pe-10">

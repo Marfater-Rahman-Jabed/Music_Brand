@@ -13,7 +13,7 @@ function App() {
 
 
   return (
-    <div>
+    <div className='overflow-x-clip'>
       <ToastContainer
         position="top-center"
         autoClose={3000}

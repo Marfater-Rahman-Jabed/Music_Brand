@@ -1,5 +1,6 @@
 import '../HeroSection/HeroSection.css'
 import Logo from '../../assets/islamicImageLogo.jpg'
+import { Link } from 'react-router-dom';
 const NavBar = () => {
     return (
         <div className="navbar bg-base-100 lg:p-6 md:p-4" style={{ position: "sticky", top: 0, zIndex: 100 }}>
@@ -65,15 +66,7 @@ const NavBar = () => {
                             </ul>
                         </details>
                     </li>
-                    <li tabIndex={0} className="mx-4">
-                        <details>
-                            <summary className="text-xl font-bold">TV Shows</summary>
-                            <ul className="p-2">
-                                <li><a>Submenu 1</a></li>
-                                <li><a>Submenu 2</a></li>
-                            </ul>
-                        </details>
-                    </li>
+
                     <li tabIndex={0} className="mx-4">
                         <details>
                             <summary className="text-xl font-bold">Pages</summary>
@@ -83,15 +76,7 @@ const NavBar = () => {
                             </ul>
                         </details>
                     </li>
-                    <li tabIndex={0} className="mx-4">
-                        <details>
-                            <summary className="text-xl font-bold">Event</summary>
-                            <ul className="p-2">
-                                <li><a>Submenu 1</a></li>
-                                <li><a>Submenu 2</a></li>
-                            </ul>
-                        </details>
-                    </li>
+
                     <li tabIndex={0} className="mx-4">
                         <details>
                             <summary className="text-xl font-bold">BLogs</summary>
@@ -100,6 +85,14 @@ const NavBar = () => {
                                 <li><a>Submenu 2</a></li>
                             </ul>
                         </details>
+                    </li>
+                    <li tabIndex={0} className="mx-4">
+
+                        <summary className="text-xl font-bold">
+                            <Link to='/createPost'>Create Post</Link>
+                        </summary>
+
+
                     </li>
 
                 </ul>

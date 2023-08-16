@@ -11,8 +11,8 @@ const ImageSection = () => {
             </div>
             <div className='lg:flex md:flex gap-2 pt-8'>
                 <div className='lg:w-1/2 md:w-1/2 lg:mb-0 md:mb-0 mb-2'>
-                    <PhotoProvider>
-                        <PhotoView src={Logosimage}>
+                    <PhotoProvider >
+                        <PhotoView src={Logosimage} >
                             <img src={Logosimage} alt="" className='h-full' />
                         </PhotoView>
                     </PhotoProvider>
