@@ -3,7 +3,7 @@ import Logo from '../../assets/islamicImageLogo.jpg'
 import { Link } from 'react-router-dom';
 const NavBar = () => {
     return (
-        <div className="navbar bg-base-100 lg:p-6 md:p-4" style={{ position: "sticky", top: 0, zIndex: 100 }}>
+        <div className="navbar bg-purple-400 lg:p-6 md:p-4" style={{ position: "sticky", top: 0, zIndex: 100 }}>
             <div className="lg:navbar-start md:navbar-start">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden ">

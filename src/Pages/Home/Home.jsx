@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import BlogSection from "../../Components/BlogSection/BlogSection";
 import Contributor from "../../Components/Contributor/Contributor";
 import HeroSection from "../../Components/HeroSection/HeroSection";
@@ -9,6 +10,9 @@ import Vidoes from "../../Components/Videos/Vidoes";
 
 
 const Home = () => {
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
     return (
         <div>
 
