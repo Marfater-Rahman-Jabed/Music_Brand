@@ -1,8 +1,12 @@
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from "react";
 import blogImage from '../../assets/islamicImageLogo.jpg'
-import { useEffect, useState } from 'react';
-import { AiFillEye } from 'react-icons/ai';
-const BlogSection = () => {
+import { AiFillEye } from "react-icons/ai";
+import { Link, useNavigate } from "react-router-dom";
+const AllArticles = () => {
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
+    const navigate = useNavigate()
     const [blogs, setBlogs] = useState([]);
     useEffect(() => {
         fetch('http://localhost:5000/allblogs')
@@ -12,7 +16,6 @@ const BlogSection = () => {
                 setBlogs(data)
             })
     }, [])
-    // console.log(blogs.length)
     return (
         <div className='py-10 bg-slate-400'>
             <div className=' pb-10'>
@@ -21,7 +24,7 @@ const BlogSection = () => {
             </div>
             <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-2 px-4">
                 {
-                    blogs?.slice(0, 4)?.map(blog => <div key={blog?._id} className="card card-compact  bg-base-100 shadow-xl">
+                    blogs?.map(blog => <div key={blog?._id} className="card card-compact  bg-base-100 shadow-xl">
                         <figure><img src={blog.img} alt="Shoes" className='h-48 w-full' /></figure>
                         <div className="card-body">
                             <span >
@@ -56,10 +59,11 @@ const BlogSection = () => {
 
             </div>
             <div className='flex lg:justify-end md:justify-end justify-center mt-6 me-6'>
-                <button className='btn bg-green-600 hover:bg-green-600 text-white'><Link to='/allArticles'>SEE All Article</Link></button>
+                <button className='btn bg-green-600 hover:bg-green-600 text-white' onClick={() => navigate(-1)}>BACK PREVIOUS</button>
             </div>
+
         </div>
     );
 };
 
-export default BlogSection;
+export default AllArticles;
