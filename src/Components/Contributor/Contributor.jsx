@@ -4,13 +4,17 @@ import Logosimage from '../../assets/islamicImageLogo.jpg'
 import { HiOutlineMailOpen } from 'react-icons/hi';
 import { BsWhatsapp } from 'react-icons/bs';
 import { AiFillGithub, AiFillYoutube } from 'react-icons/ai';
+import { Fade } from 'react-awesome-reveal';
 const Contributor = () => {
     return (
-        <div className='py-10 bg-slate-400'>
-            <div>
-                <h1 className="text-center font-bold lg:text-5xl text-4xl">Our Contributor</h1>
-                <p className="text-xl lg:px-60 px-2 lg:text-center text-justify mt-6">Grursus mal suada faci lisis Lorem ipsum dolarorit more a ametion consectetur elit. Vesti at bulum nec odio aea the dumm ipsumm ipsum.</p>
-            </div>
+        <div className='py-10 bg-fuchsia-100'>
+            <Fade direction='up' duration={2000}>
+                <div>
+                    <h1 className="text-center font-bold lg:text-5xl text-4xl">Our Contributor</h1>
+                    <p className="text-xl lg:px-60 px-2 lg:text-center text-justify mt-6">Grursus mal suada faci lisis Lorem ipsum dolarorit more a ametion consectetur elit. Vesti at bulum nec odio aea the dumm ipsumm ipsum.</p>
+                </div>
+            </Fade>
+
             <div className='grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-2 text-white lg:px-10 md:px-5 px-1 pt-6'>
 
 

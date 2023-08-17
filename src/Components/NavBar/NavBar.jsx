@@ -50,43 +50,32 @@ const NavBar = () => {
                     </ul>
                 </div>
                 <div className='flex'>
-                    <img src={Logo} alt="" className='w-20 h-20 rounded-full' />
-                    <h1 className="lg:text-7xl md:text-7xl text-6xl md:mx-2  text-color-animation font-serif"><i>Minar</i></h1>
+                    <Link to='/'><img src={Logo} alt="" className='w-20 h-20 rounded-full' /></Link>
+                    <h1 className="lg:text-7xl md:text-7xl text-6xl md:mx-2  text-color-animation font-serif"><Link to='/' className='italic'>Minar</Link></h1>
                 </div>
             </div>
-            <div className="navbar-center hidden lg:flex">
+            <div className="navbar-end hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
 
-                    <li tabIndex={0} className="mx-4">
-                        <details>
-                            <summary className="text-xl font-bold">Shows</summary>
-                            <ul className="p-2">
-                                <li><a>Submenu 1</a></li>
-                                <li><a>Submenu 2</a></li>
-                            </ul>
-                        </details>
+                    <li tabIndex={0} className="mx-2">
+
+                        <summary className="text-xl font-bold">
+                            <Link to='/allPhotos'>Photos</Link>
+                        </summary>
+
+
                     </li>
 
-                    <li tabIndex={0} className="mx-4">
-                        <details>
-                            <summary className="text-xl font-bold">Pages</summary>
-                            <ul className="p-2">
-                                <li><a>Submenu 1</a></li>
-                                <li><a>Submenu 2</a></li>
-                            </ul>
-                        </details>
+                    <li tabIndex={0} className="mx-2">
+
+                        <summary className="text-xl font-bold">
+                            <Link to='/allArticles'>Articles</Link>
+                        </summary>
+
+
                     </li>
 
-                    <li tabIndex={0} className="mx-4">
-                        <details>
-                            <summary className="text-xl font-bold">BLogs</summary>
-                            <ul className="p-2">
-                                <li><a>Submenu 1</a></li>
-                                <li><a>Submenu 2</a></li>
-                            </ul>
-                        </details>
-                    </li>
-                    <li tabIndex={0} className="mx-4">
+                    <li tabIndex={0} className="mx-2">
 
                         <summary className="text-xl font-bold">
                             <Link to='/createPost'>Create Post</Link>

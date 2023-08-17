@@ -4,6 +4,7 @@ import Home from "../Pages/Home/Home";
 import CreatePost from "../Pages/CreatePost/CreatePost";
 import BlogDetailsShowPage from "../Pages/BlogDetailsShowPage/BlogDetailsShowPage";
 import AllArticles from "../Pages/AllArticles/AllArticles";
+import AllPhotos from "../Pages/AllPhotos/AllPhotos";
 
 export const router = createBrowserRouter([
     {
@@ -29,6 +30,10 @@ export const router = createBrowserRouter([
             {
                 path: '/allArticles',
                 element: <AllArticles></AllArticles>
+            },
+            {
+                path: '/allPhotos',
+                element: <AllPhotos></AllPhotos>
             }
         ]
     }
