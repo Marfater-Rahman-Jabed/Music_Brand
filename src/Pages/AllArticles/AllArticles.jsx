@@ -9,7 +9,7 @@ const AllArticles = () => {
     const navigate = useNavigate()
     const [blogs, setBlogs] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/allblogs')
+        fetch('http://localhost:5000/allblogsDetails')
             .then(res => res.json())
             .then(data => {
                 // console.log(data)
@@ -17,8 +17,8 @@ const AllArticles = () => {
             })
     }, [])
     return (
-        <div className='py-10 bg-slate-400'>
-            <div className=' pb-10'>
+        <div className='py-10 bg-gradient-to-r from-orange-700 via-black to-red-700'>
+            <div className='text-white pb-10'>
                 <h1 className="text-center font-bold text-5xl">Our Article</h1>
                 <p className="text-xl lg:px-60 px-4 text-center mt-6">Grursus mal suada faci lisis Lorem ipsum dolarorit more a ametion consectetur elit. Vesti at bulum nec odio aea the dumm ipsumm ipsum.</p>
             </div>

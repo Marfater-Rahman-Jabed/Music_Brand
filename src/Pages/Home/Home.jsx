@@ -7,14 +7,14 @@ import PopularBlog from "../../Components/HeroSection/PopularBlog/PopularBlog";
 import ImageSection from "../../Components/ImageSection/ImageSection";
 import UpcommingBlog from "../../Components/UpcommingBlog/UpcommingBlog";
 import Vidoes from "../../Components/Videos/Vidoes";
-
+// import Logo from '../../assets/blackbg.jpeg'
 
 const Home = () => {
     useEffect(() => {
         window.scrollTo(0, 0)
     }, [])
     return (
-        <div>
+        <div className="bg-gradient-to-r from-orange-700 via-black to-red-700">
 
             <HeroSection></HeroSection>
             <BlogSection></BlogSection>

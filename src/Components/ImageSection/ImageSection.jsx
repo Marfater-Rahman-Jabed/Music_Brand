@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 import { Fade } from 'react-awesome-reveal';
-
+// import Logo from '../../assets/fire5.jpg'
 const ImageSection = () => {
     const resolveAfter3Sec = new Promise(resolve => setTimeout(resolve, 1000));
     const rackupimage = import.meta.env.VITE_RackUpImageKey
@@ -73,7 +73,7 @@ const ImageSection = () => {
 
     }
     return (
-        <div className='py-10 bg-fuchsia-100 lg:px-16 md:px-6 px-2'>
+        <div className='py-10  lg:px-16 md:px-6 px-2 text-white' >
             <Fade direction='up' duration={2000}>
                 <div>
                     <h1 className="text-center font-bold lg:text-5xl text-4xl">Our Images</h1>
@@ -92,7 +92,7 @@ const ImageSection = () => {
                     {
                         totalImages?.slice(0, 1).map(image => <PhotoProvider key={image?._id}>
                             <PhotoView src={image?.img} >
-                                <img src={image?.img} alt="" className='h-full w-full' />
+                                <img src={image?.img} alt="" className='lg:h-[76vh] md:h-[42vh] w-full' />
                             </PhotoView>
                         </PhotoProvider>)
                     }

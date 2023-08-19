@@ -18,29 +18,30 @@
 /* The animation definition */
 @keyframes color-change {
     0% {
-        color: #0150fa;
+        color: whitesmoke;
         /* transform: translateY(0%); */
     }
 
     20% {
-        color: #281385;
+        color: #1bcdec;
     }
 
     40% {
-        color: #281385;
+        color: #1095d3;
     }
 
     60% {
-        color: #fa010a;
+        color: #fc049d;
         /* transform: translateY(15%); */
     }
+
 
     80% {
         color: #f35805;
     }
 
     100% {
-        color: #1f5ee6;
+        color: white;
         /* transform: translateY(5%); */
     }
 }

@@ -5,6 +5,7 @@ import CreatePost from "../Pages/CreatePost/CreatePost";
 import BlogDetailsShowPage from "../Pages/BlogDetailsShowPage/BlogDetailsShowPage";
 import AllArticles from "../Pages/AllArticles/AllArticles";
 import AllPhotos from "../Pages/AllPhotos/AllPhotos";
+import AllVideos from "../Pages/AllVideos/AllVideos";
 
 export const router = createBrowserRouter([
     {
@@ -34,6 +35,9 @@ export const router = createBrowserRouter([
             {
                 path: '/allPhotos',
                 element: <AllPhotos></AllPhotos>
+            }, {
+                path: '/allvideos',
+                element: <AllVideos></AllVideos>
             }
         ]
     }

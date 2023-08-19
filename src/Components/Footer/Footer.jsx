@@ -1,8 +1,8 @@
-
+// import Logo from '../../assets/fire5.jpg'
 const Footer = () => {
     return (
-        <div>
-            <footer className="footer footer-center p-10   bg-black text-white ">
+        <div className="bg-gradient-to-r from-orange-700 via-slate-600 to-red-700">
+            <footer className="footer footer-center p-10    text-white ">
                 <div className="grid grid-flow-col gap-4">
                     <a className="link link-hover font-bold">About us</a>
                     <a className="link link-hover font-bold">Contact</a>

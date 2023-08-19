@@ -3,6 +3,7 @@ import imgLogo from '../../../assets/islamicImageLogo.jpg'
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Fade } from 'react-awesome-reveal';
+// import Logo from '../../../assets/fire5.jpg'
 const PopularBlog = () => {
     const [populars, setPopulars] = useState([])
     useEffect(() => {
@@ -14,20 +15,20 @@ const PopularBlog = () => {
             })
     }, [])
     return (
-        <div className="py-10 bg-fuchsia-300">
+        <div className="py-10 text-white" >
             <Fade direction='up' duration={2000}>
                 <div>
                     <h1 className="text-center font-bold lg:text-5xl text-4xl">Top 5 Popular Blog</h1>
                     <p className="text-xl lg:px-60 px-4 text-center mt-6">Grursus mal suada faci lisis Lorem ipsum dolarorit more a ametion consectetur elit. Vesti at bulum nec odio aea the dumm ipsumm ipsum.</p>
                 </div>
             </Fade>
-            <div className='pt-10 lg:px-28'>
+            <div className='pt-10 lg:px-28 md:px-12'>
                 {
                     populars?.slice(0, 5).map(popular => <Fade key={popular?._id} direction='up' duration={2000}>
                         <div className="lg:px-10 px-2">
-                            <div className="flex justify-between bg-slate-700 text-white rounded-lg">
-                                <div className="p-4 lg:w-80 w-44">
-                                    <h1 className='lg:text-2xl font-bold'>{popular?.title}</h1>
+                            <div className="flex justify-between bg-slate-700 text-white rounded-lg ">
+                                <div className="p-6 lg:w-80 md:w-80 w-44 ">
+                                    <h1 className='lg:text-2xl md:text-xl font-bold'>{popular?.title}</h1>
                                     <h1 className=' lg:font-serif font-thin'>
                                         {
                                             popular?.time?.slice(0, 14) === new Date().toString().slice(0, 14) ? <p className='text-green-500 animate-pulse'>Published : {popular?.time?.slice(8, 10)}{popular?.time?.slice(3, 7)}{popular?.time?.slice(10, 15)}</p> : <p>Published : {popular?.time?.slice(8, 10)}{popular?.time?.slice(3, 7)}{popular?.time?.slice(10, 15)}</p>

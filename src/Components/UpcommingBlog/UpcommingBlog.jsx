@@ -4,9 +4,10 @@ import logo from '../../assets/islamicImageLogo.jpg'
 import { useQuery } from '@tanstack/react-query';
 import { AiFillDelete } from 'react-icons/ai';
 import { Fade } from 'react-awesome-reveal';
+// import Logo from '../../assets/fire5.jpg'
 const UpcommingBlog = () => {
-    const month = ["January", "February", "March", "April", "May", "June", "July",
-        "August", "September", "October", "November", "December"];
+    const month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul",
+        "Aug", "Sept", "Oct", "Nov", "Dec"];
     const resolveAfter3Sec = new Promise(resolve => setTimeout(resolve, 1000));
     const [crossVAlue, setCrossVAlue] = useState(false)
     const { data: AllUpCommingBlogs = [], refetch } = useQuery({
@@ -90,33 +91,34 @@ const UpcommingBlog = () => {
 
 
     return (
-        <div className="py-10 ">
+        <div className="py-10  " >
             <Fade direction='up' duration={2000}>
-                <div>
+                <div className='text-white'>
                     <h1 className="text-center font-bold lg:text-5xl text-4xl">UpComming Blog</h1>
                     <p className="text-xl lg:px-60 px-4 text-center mt-6">Grursus mal suada faci lisis Lorem ipsum dolarorit more a ametion consectetur elit. Vesti at bulum nec odio aea the dumm ipsumm ipsum.</p>
                 </div>
             </Fade>
-            <div className='flex lg:justify-end md:justify-end justify-center mt-10 mb-4 me-10'>
+            <div className='flex lg:justify-end md:justify-end justify-center mt-10 mb-4 me-10 md:me-16'>
                 <button className='btn bg-green-600 hover:bg-green-600 text-white' onClick={() => { window.upCommingModal.showModal() }}>Create UpComing</button>
             </div>
-            <div className=' grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 gap-x-3 gap-y-1 lg:px-10 px-2'>
+            <div className=' grid lg:grid-cols-2 md:grid-cols-1 grid-cols-1 gap-x-3 gap-y-1 lg:px-10 md:px-16 px-2'>
 
                 {
                     AllUpCommingBlogs?.map(UpcommingBlog => <Fade key={UpcommingBlog?._id} direction='up' duration={2000}>
-                        <div className='   flex items-center justify-between text-white bg-slate-700 lg:p-4 p-2 rounded-md'>
-                            <div className='flex  items-center'>
-                                <img src={logo} alt="" className='w-20 h-20 rounded-lg lg:mr-6 mr-2' />
+                        <div className='   flex items-center justify-between text-white bg-slate-700 gap-4 lg:p-4 p-2 rounded-md'>
+                            <div className='flex  items-center 
+                             '>
+                                <img src={logo} alt="" className='lg:w-20 md:w-20 w-0 lg:h-20 md:h-20 h-0 rounded-lg lg:mr-6 mr-2' />
                                 <span>
                                     <h1 className='text-xl font-bold'>{UpcommingBlog?.title}</h1>
                                     <h1>{UpcommingBlog?.bloger}</h1>
 
                                 </span>
                             </div>
-                            <div className='lg:pe-8 flex items-center gap-2'>
-                                <button className='btn bg-orange-600 hover:bg-red-600 rounded-full text-white'>Release Date : <br /> {UpcommingBlog?.releaseDate.slice(8, 10)} {month[parseInt(UpcommingBlog?.releaseDate.slice(5, 8)) - 1]} {UpcommingBlog?.releaseDate.slice(0, 4)}</button>
+                            <div className='  flex items-center justify-end  gap-2    '>
+                                <button className='btn bg-orange-600 hover:bg-red-600 rounded-full text-white '>Release Date : <br /> {UpcommingBlog?.releaseDate.slice(8, 10)} {month[parseInt(UpcommingBlog?.releaseDate.slice(5, 8)) - 1]} {UpcommingBlog?.releaseDate.slice(0, 4)}</button>
                                 <div >
-                                    <button className='bg-red-700 p-2 rounded-full' onClick={() => handleDelete(UpcommingBlog._id)}><AiFillDelete className='text-xl'></AiFillDelete></button>
+                                    <button className='bg-red-700 lg:p-2 md:p-2 rounded-full lg:visible md:visible invisible lg:w-full md:w-full w-0' onClick={() => handleDelete(UpcommingBlog._id)}><AiFillDelete className='text-xl'></AiFillDelete></button>
                                 </div>
                             </div>
 

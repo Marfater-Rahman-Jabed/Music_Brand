@@ -90,7 +90,7 @@ const CreatePost = () => {
     }
 
     return (
-        <div>
+        <div className=''>
             <div className='text-center pt-2'>
                 <h1 className='text-4xl font-bold'>Create Your Post Now</h1>
             </div>
