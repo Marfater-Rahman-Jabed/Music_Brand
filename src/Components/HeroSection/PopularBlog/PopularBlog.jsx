@@ -7,7 +7,7 @@ import { Fade } from 'react-awesome-reveal';
 const PopularBlog = () => {
     const [populars, setPopulars] = useState([])
     useEffect(() => {
-        fetch('http://localhost:5000/popularblogs')
+        fetch('https://music-brand-server.vercel.app/popularblogs')
             .then(res => res.json())
             .then(data => {
                 // console.log(data)

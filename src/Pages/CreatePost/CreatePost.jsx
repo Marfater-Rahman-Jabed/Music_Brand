@@ -61,7 +61,7 @@ const CreatePost = () => {
                         view: 0,
                         time: new Date().toString()
                     }
-                    fetch('http://localhost:5000/createPost', {
+                    fetch('https://music-brand-server.vercel.app/createPost', {
                         method: "POST",
                         headers: {
                             'content-type': 'application/json'
@@ -91,7 +91,7 @@ const CreatePost = () => {
 
     return (
         <div className=''>
-            <div className='text-center pt-2'>
+            <div className='text-center pt-4'>
                 <h1 className='text-4xl font-bold'>Create Your Post Now</h1>
             </div>
             <div className='py-10 lg:px-10 md:px-4 px-4 lg:flex md:flex gap-2'>

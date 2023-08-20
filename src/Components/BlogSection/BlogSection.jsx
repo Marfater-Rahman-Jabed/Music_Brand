@@ -10,7 +10,7 @@ import Slider from 'react-slick';
 const BlogSection = () => {
     const [blogs, setBlogs] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/allblogs')
+        fetch('https://music-brand-server.vercel.app/allblogs')
             .then(res => res.json())
             .then(data => {
                 // console.log(data)

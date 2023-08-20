@@ -16,7 +16,7 @@ const ImageSection = () => {
     const { data: totalImages = [], refetch } = useQuery({
         queryKey: ["images"],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/images`)
+            const res = await fetch(`https://music-brand-server.vercel.app/images`)
             const data = res.json();
             return data
         }
@@ -45,7 +45,7 @@ const ImageSection = () => {
                         img: image.data.url
                     }
 
-                    fetch(`http://localhost:5000/UploadImages`, {
+                    fetch(`https://music-brand-server.vercel.app/UploadImages`, {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json',
@@ -63,7 +63,7 @@ const ImageSection = () => {
                                     success: 'SuccessFully UpLoaded👌'
                                 }
                             )
-                            refetch(`http://localhost:5000/images`)
+                            refetch(`https://music-brand-server.vercel.app/images`)
                         })
                 }
             })

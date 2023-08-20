@@ -20,6 +20,7 @@ const Vidoes = () => {
     const resolveAfter3Sec = new Promise(resolve => setTimeout(resolve, 1000));
     // const [clickAll, setClickAll] = useState()
     const [url, setUrl] = useState([])
+    const [title, setTitle] = useState([])
     const [thumbneilId, setThumbneilId] = useState(null)
     const [imgId, setImgId] = useState(null)
     const [value, setValue] = useState(false)
@@ -31,7 +32,7 @@ const Vidoes = () => {
     const { data: totalVideos = [], refetch } = useQuery({
         queryKey: ["videos"],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/videos`)
+            const res = await fetch(`https://music-brand-server.vercel.app/videos`)
             const data = res.json();
             return data
         }
@@ -39,7 +40,7 @@ const Vidoes = () => {
 
     const handleDelete = (id) => {
         console.log(id)
-        fetch(`http://localhost:5000/videoDelete/${id}`, {
+        fetch(`https://music-brand-server.vercel.app/videoDelete/${id}`, {
             method: 'Delete'
         })
             .then(res => res.json())
@@ -52,7 +53,7 @@ const Vidoes = () => {
                         success: 'SuccessFully Deleted👌'
                     }
                 )
-                refetch(`http://localhost:5000/videos`)
+                refetch(`https://music-brand-server.vercel.app/videos`)
             })
     }
     const handleTitle = (e) => {
@@ -65,7 +66,7 @@ const Vidoes = () => {
             title: titleName
         }
         if (!crossVAlue && titleName) {
-            fetch(`http://localhost:5000/updateTitle`, {
+            fetch(`https://music-brand-server.vercel.app/updateTitle`, {
                 method: 'put',
                 headers: {
                     'content-type': 'application/json'
@@ -83,7 +84,7 @@ const Vidoes = () => {
                             success: 'SuccessFully Updated👌'
                         }
                     )
-                    refetch(`http://localhost:5000/videos`)
+                    refetch(`https://music-brand-server.vercel.app/videos`)
                 })
         }
 
@@ -110,7 +111,7 @@ const Vidoes = () => {
                         img: image.data.url
                     }
 
-                    fetch(`http://localhost:5000/updateImage`, {
+                    fetch(`https://music-brand-server.vercel.app/updateImage`, {
                         method: 'PUT',
                         headers: {
                             'content-type': 'application/json',
@@ -127,7 +128,7 @@ const Vidoes = () => {
                                     success: 'SuccessFully Updated👌'
                                 }
                             )
-                            refetch(`http://localhost:5000/videos`)
+                            refetch(`https://music-brand-server.vercel.app/videos`)
                         })
                 }
             })
@@ -137,11 +138,12 @@ const Vidoes = () => {
 
     }
 
-    const handleVideo = (ids, src) => {
+    const handleVideo = (ids, src, title) => {
         console.log(ids)
         window.my_modal_3.showModal()
         setUrl(src)
         setValue(true)
+        setTitle(title)
     }
     const handleRightClick = (e) => {
         e.preventDefault();
@@ -167,7 +169,7 @@ const Vidoes = () => {
                     src: data.secure_url
                 }
                 if (data.secure_url) {
-                    fetch('http://localhost:5000/uploadVideo', {
+                    fetch('https://music-brand-server.vercel.app/uploadVideo', {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json'
@@ -185,7 +187,7 @@ const Vidoes = () => {
                                     success: 'SuccessFully Uploaded👌'
                                 }
                             )
-                            refetch(`http://localhost:5000/videos`)
+                            refetch(`https://music-brand-server.vercel.app/videos`)
                         })
                 }
             })
@@ -211,7 +213,7 @@ const Vidoes = () => {
                 {
                     totalVideos?.map((vidoe, i) => <Fade key={i} direction='left' duration={2000}>
                         <div className='h-96 bg-base-200 shadow-lg rounded-lg'>
-                            <button onClick={() => handleVideo(vidoe._id, vidoe.src)}> <span >
+                            <button onClick={() => handleVideo(vidoe._id, vidoe.src, vidoe.title)}> <span >
                                 <img src={vidoe?.picture ? vidoe?.picture : `https://i.ibb.co/VW3r4C6/267-2678423-bacteria-video-thumbnail-default.png`} onContextMenu={handleRightClick} alt="" className='h-60 w-[100vw] rounded-t-lg' />
                             </span>
                                 <span className=''>
@@ -237,9 +239,10 @@ const Vidoes = () => {
 
 
             <dialog id="my_modal_3" className="modal">
-                <form method="dialog" className="modal-box p-4 lg:h-[70vh] md:h-[55vh]   w-[100vw]  bg-black">
+                <form method="dialog" className="modal-box p-6 lg:h-[75vh]   w-[100vw]  bg-slate-950">
                     <button className="btn btn-md  btn-circle bg-red-500 absolute right-4 lg:top-6 md:top-4 top-4 text-2xl" onClick={() => setValue(false)}>✕</button>
-                    <div className=' w-full lg:mt-12 md:mt-16 mt-16 rounded-full lg:h-5/6 '>
+                    <h1 className='text-xl text-white text-center'>Video title : {title}</h1>
+                    <div className=' w-full lg:mt-6 md:mt-10 mt-12 rounded-full lg:h-5/6 '>
                         <ReactPlayer url={url} controls playing={value} width='100%'
                             height='100%'
 

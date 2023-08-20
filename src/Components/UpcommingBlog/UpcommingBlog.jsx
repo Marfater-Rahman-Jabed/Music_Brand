@@ -13,7 +13,7 @@ const UpcommingBlog = () => {
     const { data: AllUpCommingBlogs = [], refetch } = useQuery({
         queryKey: ["upcommigBlogs"],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/allUpcommigBlogs`)
+            const res = await fetch(`https://music-brand-server.vercel.app/allUpcommigBlogs`)
             const data = res.json();
             return data
         }
@@ -32,7 +32,7 @@ const UpcommingBlog = () => {
             title, bloger, releaseDate
         }
         if (!crossVAlue && title && bloger && releaseDate) {
-            fetch(`http://localhost:5000/setUpCommingBlog`, {
+            fetch(`https://music-brand-server.vercel.app/setUpCommingBlog`, {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
@@ -50,7 +50,7 @@ const UpcommingBlog = () => {
                             success: 'SuccessFully UpLoaded👌'
                         }
                     )
-                    refetch(`http://localhost:5000/allUpcommigBlogs`)
+                    refetch(`https://music-brand-server.vercel.app/allUpcommigBlogs`)
                 })
         }
         else if (!crossVAlue && (!title || !bloger || !releaseDate)) {
@@ -71,7 +71,7 @@ const UpcommingBlog = () => {
 
     const handleDelete = (id) => {
         console.log(id)
-        fetch(`http://localhost:5000/deleteUpcomming/${id}`, {
+        fetch(`https://music-brand-server.vercel.app/deleteUpcomming/${id}`, {
             method: "DELETE"
         })
             .then(res => res.json())
@@ -84,7 +84,7 @@ const UpcommingBlog = () => {
                         success: 'SuccessFully Deleted !!!'
                     }
                 )
-                refetch(`http://localhost:5000/allUpcommigBlogs`)
+                refetch(`https://music-brand-server.vercel.app/allUpcommigBlogs`)
             })
     }
 

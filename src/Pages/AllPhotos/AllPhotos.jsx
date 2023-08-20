@@ -11,14 +11,14 @@ const AllPhotos = () => {
     const { data: totalImages = [] } = useQuery({
         queryKey: ["images"],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/images`)
+            const res = await fetch(`https://music-brand-server.vercel.app/images`)
             const data = res.json();
             return data
         }
     })
     return (
         <div className="py-10 bg-gradient-to-r from-orange-700 via-black to-red-700 ">
-            <div className="pb-10">
+            <div className="pb-10 text-white">
                 <h1 className="text-center font-bold lg:text-5xl text-4xl">Our Images</h1>
                 <p className="text-xl lg:px-60 px-2 lg:text-center text-justify mt-6">Grursus mal suada faci lisis Lorem ipsum dolarorit more a ametion consectetur elit. Vesti at bulum nec odio aea the dumm ipsumm ipsum.</p>
             </div>

@@ -11,12 +11,12 @@ const BlogDetailsShowPage = () => {
     const UrlId = window.location.pathname.split('/')[2];
     const [details, setDetails] = useState([])
     useEffect(() => {
-        fetch(`http://localhost:5000/blogdetailsshow/${UrlId}`)
+        fetch(`https://music-brand-server.vercel.app/blogdetailsshow/${UrlId}`)
             .then(res => res.json())
             .then(data => {
                 console.log(data)
                 setDetails(data)
-                fetch(`http://localhost:5000/ViewUpdate`, {
+                fetch(`https://music-brand-server.vercel.app/ViewUpdate`, {
                     method: 'PUT',
                     headers: {
                         'content-type': 'application/json'

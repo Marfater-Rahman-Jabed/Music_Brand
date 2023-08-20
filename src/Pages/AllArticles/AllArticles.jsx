@@ -9,7 +9,7 @@ const AllArticles = () => {
     const navigate = useNavigate()
     const [blogs, setBlogs] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/allblogsDetails')
+        fetch('https://music-brand-server.vercel.app/allblogsDetails')
             .then(res => res.json())
             .then(data => {
                 // console.log(data)
